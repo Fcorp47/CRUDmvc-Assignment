@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Assignment.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<CENTER><h2>EMPLOYEE LIST</h2></CENTER>
+
+
+
+@if (TempData["DeleteMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["DeleteMessage"]
+    </div>
+}
+
+@if (TempData["InsertMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["insertMessage"]
+    </div>
+}
+
+<button type="button" onclick="location.href='@Url.Action("Create", "Home")'" class="btn btn-dark"> ADD EMPLOYEE </button>
+
+
+
+
+<p>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <b> Search By: </b>
+
+        <input type="text" name="search" class="form-control" placeholder="search here" />
+        <input type="submit" value="Search" class="btn btn-dark" />
+
+
+    }
+</p>
+
+<table class="table table-hover table-bordered  table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Designation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Knowledge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Report_person)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.joindept)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Knowledge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoinDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Report_person)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@if (TempData["records"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @TempData["records"]
+    </div>
+}
+
+
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+@Html.ActionLink("Back to List", "Index")
